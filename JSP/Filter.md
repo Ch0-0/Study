@@ -282,6 +282,7 @@ encoding이라는 필터를 com.greedy.(중략).EncodingFilter 클래스에 구�
 
 필터에서 사용할 메소드를 가지고 있는 클래스
 
+![image](https://user-images.githubusercontent.com/96282369/235052723-6269d507-c09d-473a-9d46-a2c9edf90b91.png)
 
 
 
@@ -289,11 +290,13 @@ Filter 파일로 어노테이션 형식이 WebFilter이고 /first이하 모든 �
 
 (Filter 클래스는 Filter 인터페이스를 상속한다.)
 
+![image](https://user-images.githubusercontent.com/96282369/235052731-f50c69d7-8a3e-4f4a-87a9-231992817e7b.png)
 
 
 
 init() 메소드로 필터가 호출되고, doFilter() 메소드는 Servlet으로 request가 전달되기 전에 가로채는 역할을 한다.
 
+![image](https://user-images.githubusercontent.com/96282369/235052746-6787941d-9095-4b51-80f8-aad149b4c651.png)
 
 
 
@@ -307,6 +310,7 @@ EncodingFilter
 
 필터를 사용하는 클래스로 해당 예제에서는 인코딩 처리를 하였다.
 
+![image](https://user-images.githubusercontent.com/96282369/235052764-e1a98fab-f4ef-4add-b0fd-e847c7b15ec3.png)
 
 
 우선 init() 메소드를 상속 받아 모든 속성이 담겨 있는 filterConfig에서 getInitParameter() 메소드를 이용하여, 인코딩 타입(encoding-type)을 변수에 담아주었다.
@@ -327,5 +331,6 @@ FirstFilterTestServlet
 
 필터된 것을 응답해주는 서블릿이다.
 
+![image](https://user-images.githubusercontent.com/96282369/235052775-cb729722-53af-405e-967e-3088f4fdc570.png)
 
  
