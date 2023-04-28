@@ -243,6 +243,7 @@ public void init(FilterConfig filterConfig) throws ServletException {
 chain과 doFilter() 메소드를 이용하여 다음 필터를 실행 할 수 있다.
 
  
+![image](https://user-images.githubusercontent.com/96282369/235052646-3398366c-b63f-4d76-99d3-84b57eb60712.png)
 
 
  
@@ -258,6 +259,7 @@ chain과 doFilter() 메소드를 이용하여 다음 필터를 실행 할 수 �
 
 아이디와 비밀번호, 이름을 입력받아 회원가입 하는 페이지 작성 (Post방식)
 
+![image](https://user-images.githubusercontent.com/96282369/235052629-b4b14b8b-1a12-4a81-af3c-48c9723372cd.png)
 
  
 
@@ -265,6 +267,7 @@ chain과 doFilter() 메소드를 이용하여 다음 필터를 실행 할 수 �
 
 필터를 등록하고 매핑해준다.
 
+![image](https://user-images.githubusercontent.com/96282369/235052669-d2190f74-22e5-4586-a5e4-51824f58f20f.png)
 
 
 encoding이라는 필터를 com.greedy.(중략).EncodingFilter 클래스에 구현을 하고,
