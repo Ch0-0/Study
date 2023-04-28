@@ -129,3 +129,201 @@ Filter 메소드는 다음과 같은 메소드가 선언되어 있다.
  * ’/’로 시작하고 ‘/*‘로 끝나는 url-pattern은 경로 매핑 시 사용됨
  * ‘*.’로 시작하는 url-pattern은 확장자에 대한 매핑 시 사용됨
  * 나머지 다른 문자열은 정확한 매핑을 위해 사용됨
+
+
+
+
+
+-----------
+
+
+서블릿 필터(Sevlet Filter)
+ 
+
+java.servlet.Filter 인터페이스를 상속받아 구현하는 클래스이다.
+
+HTTP 요청과 응답 사이에서 전달되는 데이터를 가로채어
+
+서비스에 맞게 변경하고 걸러내는 필터링 작업을 수행한다.
+
+ 
+
+
+ 
+
+요청과 응답의 처리 내용
+
+Request: 보안 관련 사항, 요청 헤더와 바디 형식 지정, 요청 log 기록
+
+Response: 응답 스트림 압축, 응답 스트림 내용 추가 및 수정, 새로운 응답 작성
+
+ 
+
+ 
+
+코드 작성하는 법
+ 
+
+1. DD설정 (Web.xml)
+
+ 
+
+필터 설정
+
+<filter>
+    <filter-name> 필터설정이름 </filter-name>
+    <filter-class> 필터를 구현한 클래스 </filter class>
+    <init param > // filter 에서 사용할 값 설정
+        <param name> 초기값 설정 이름 <param name>
+        <param value> 설정값 </param value>
+    </init param>
+</filter>
+
+ 
+
+필터 맵핑-1 .url 패턴 (우선적용)
+
+<filter-mapping>
+    <filter-name> 등록된 필터이름 </filter-name>
+    <url-pattern> 요청한 페이지 형식 <url-pattern>
+</filter-mapping>
+
+ 
+
+필터 맵핑-2. 서블릿 매핑
+
+<filter-mapping>
+    <filter-name> 등록된 필터이름 </filter-name>
+
+    <servlet-name> 적용할 서블릿명 </servlet name>
+</filter-mapping>
+
+ 
+
+ 
+
+2. 클래스 설정 (java)
+
+public class EncodingFilter implements Filter {  // 필터 인터페이스 상속
+
+ 
+
+@Override
+public void destroy() {
+
+    삭제시 작업 설정
+
+}
+
+ 
+
+@Override
+public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+throws IOException, ServletException {
+
+    필터링 할 작업 설정 (chain 작성 필요)
+
+}
+
+ 
+
+@Override
+public void init(FilterConfig filterConfig) throws ServletException {
+
+    필터 호출시 작업 설정
+
+}
+
+ 
+
+필터 체인(Filter Chain)이란?
+
+여러 개의 필터가 서로 연결되어 있고 순서대로 doFilter() 메소드를 이용하여 실행시키는 인터페이스이다.
+
+chain과 doFilter() 메소드를 이용하여 다음 필터를 실행 할 수 있다.
+
+ 
+
+
+ 
+
+ 
+
+예제
+
+ 
+
+index
+
+아이디와 비밀번호, 이름을 입력받아 회원가입 하는 페이지 작성 (Post방식)
+
+
+ 
+
+web.xml
+
+필터를 등록하고 매핑해준다.
+
+
+encoding이라는 필터를 com.greedy.(중략).EncodingFilter 클래스에 구현을 하고,
+
+필터의 초기값 이름은 encoding-type이고 필터 값(인코딩) UTF-8이다.
+
+ 
+
+ 
+
+FirstFilter
+
+필터에서 사용할 메소드를 가지고 있는 클래스
+
+ 
+
+
+Filter 파일로 어노테이션 형식이 WebFilter이고 /first이하 모든 것을 mapping하였다.
+
+(Filter 클래스는 Filter 인터페이스를 상속한다.)
+
+ 
+
+
+init() 메소드로 필터가 호출되고, doFilter() 메소드는 Servlet으로 request가 전달되기 전에 가로채는 역할을 한다.
+
+ 
+
+
+필터 인스턴스가 소멸될 때 호출되는 메소드이다.
+
+ 
+
+ 
+
+EncodingFilter
+
+필터를 사용하는 클래스로 해당 예제에서는 인코딩 처리를 하였다.
+
+ 
+
+
+우선 init() 메소드를 상속 받아 모든 속성이 담겨 있는 filterConfig에서 getInitParameter() 메소드를 이용하여, 인코딩 타입(encoding-type)을 변수에 담아주었다.
+
+ 
+
+그리고 doFilter에서 ServletRequest 타입인 request를 래퍼 클래스인 HttpServletRequest로 다운캐스팅하여, setCharacterEncoding() 메소드를 이용하여 인코딩을 해준다.
+
+ 
+
+여기서 chain.doFilter(hrequest, response); 를 사용하여 다음 필터를 실행한다.
+
+ 
+
+ 
+
+FirstFilterTestServlet
+
+필터된 것을 응답해주는 서블릿이다.
+
+ 
+
+
+ 
