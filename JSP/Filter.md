@@ -146,7 +146,8 @@ HTTP 요청과 응답 사이에서 전달되는 데이터를 가로채어
 
 서비스에 맞게 변경하고 걸러내는 필터링 작업을 수행한다.
 
- 
+ ![image](https://user-images.githubusercontent.com/96282369/235052525-a9640a9b-9085-4d65-b2e4-184f3b5444ac.png)
+
 
  
 
