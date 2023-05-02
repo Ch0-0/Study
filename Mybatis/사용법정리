@@ -1,0 +1,87 @@
+## Mybatis 정의
+Mybatis는 개발자가 지정한 SQL, 저장 프로시저 그리고 몇가지 고급 매핑을 지원하는 퍼시스턴스 프레임워크이다.
+Mybatis는 JDBC로 처리하는 상당부분의 코드와 파라미터 설정 및 결과 매핑을 대신해준다. Mybatis는 데이터베이스 레코드에 원시타입과 Map 인터페이스 
+그리고 자바 POJO 를 설정해서 매핑하기 위해 XML과 애노테이션을 사용할 수 있다.
+
+
+### Mybatis 설정
+
+pom.xml
+```
+dependency>
+  <groupId>org.mybatis</groupId>
+  <artifactId>mybatis</artifactId>
+  <version>3.4.5</version>
+</dependency>
+
+```
+
+
+SqlSessionFactory 빌드하기
+```
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 프로퍼티 파일의 정보를 읽을 수 있도록 설정. -->
+	<properties resource="mybatis/db.properties" />
+	
+	<!-- 트랜젝션 관리와 케넥션 풀링을 위한 환경설 -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>
+  
+  <!-- SQL 코드와 매핑 정의를 가지는 XML 파일인 mapper 의 목록을 지정한다. -->
+	<mappers>
+		<mapper resource="mybatis/UserMapper.xml"/>
+	</mappers>
+</configuration>
+  ```
+  
+  접속정보는 db.properties처럼 따로 빼서 설정하기도 함.
+  
+  UserMapper.xml 란 쿼리문이 들어있는 xml을 말함.
+  경로/**/*.xml 형식으로 만들어 놓고 파일을 분리해서 만들어 호출도 가능함.
+  
+  
+  Build
+  ```
+  public void SqlFactorySessionBuild(){
+		//설정정보의 InputStream을 받아온다.
+		String resource = "mybatis-config.xml";
+		InputStream inputStream = getClass().getResourceAsStream(resource);
+		
+		//InputStream을 통해 설정정보를 읽어서 SqlSessionFactory를 빌드한다.
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder()
+				.build(inputStream);
+		
+		assertThat(sqlSessionFactory,notNullValue());
+	}
+  ```
+  
+  혹은 DAO에서 상속받아 빌드도 가능하다.
+  
+  ```
+  public class _DAO extends SqlSessionDaoSupport{
+  
+  @Resource(name="sqlSessionFactory")...
+  }
+  ```
+  이렇게 할경우 application-resource.xml 같은 파일을 만들어 bean 설정을 만들어준다
+  
+  ```
+  <bean id="sqlSessionFactory" class=...
+  ```
+  
+  해당클래스는 FactoryBean을 또 만들어줘야한다.
+  
+  
