@@ -52,7 +52,7 @@ AJAX를 사용하려면 스크립팅 언어가 필요합니다. AJAX 호출이 �
 #### 1. 기본적인 문법
 <details>
   <summary>펼치기/접기</summary>
-  ```
+```
 //다른 파일을 현재 파일에 구동하는 방식 jQuery
 //여기선 dictionary를 구현 
 $(document).ready(function() {
@@ -140,7 +140,7 @@ document.querySelector('데이터 입력 선택자').addEventListener('event').f
 });
 </script>
 //참고 http://www.nextree.co.kr/p11205/
-  ```
+```
   
   </details>
 
