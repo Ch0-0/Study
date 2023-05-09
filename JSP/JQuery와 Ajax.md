@@ -52,7 +52,9 @@ AJAX를 사용하려면 스크립팅 언어가 필요합니다. AJAX 호출이 �
 #### 1. 기본적인 문법
 <details>
   <summary>펼치기/접기</summary>
-  ㄴㄴ
+  ```
+  test
+  ```
   </details>
 
   
