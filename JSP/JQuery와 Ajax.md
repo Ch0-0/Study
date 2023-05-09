@@ -141,7 +141,8 @@ document.querySelector('데이터 입력 선택자').addEventListener('event').f
 </script>
 참고 http://www.nextree.co.kr/p11205/
   ```
-</details>
+  
+  </details>
 
 #### 2.common.js 활용
 
