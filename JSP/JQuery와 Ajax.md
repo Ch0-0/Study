@@ -47,6 +47,7 @@ AJAX를 사용하려면 스크립팅 언어가 필요합니다. AJAX 호출이 �
 [출처: https://ko.strephonsays.com/ajax-and-vs-jquery-11297]
 
 
+
 ### Ajax 문법
 #### 1. 기본적인 문법
 <details>
@@ -149,3 +150,84 @@ document.querySelector('데이터 입력 선택자').addEventListener('event').f
 
   
 
+
+#### 2.common.js 활용
+
+<details>
+  <summary>만들기(common.js)</summary>
+  
+  ```
+  var gfv_ajaxCallback = "";
+function ComAjax(opt_formId){
+
+    //아래 메소드를 사용해서 url,formId,param,callBack 을 $.ajax에 집어넣는다
+    this.url = "";     
+    this.formId = gfn_isNull(opt_formId) == true ? "commonForm" : opt_formId;
+    this.param = "";
+     
+    if(this.formId == "commonForm"){
+        var frm = $("#commonForm");
+        if(frm.length > 0){
+            frm.remove();
+        }
+        var str = "<form id='commonForm' name='commonForm'></form>";
+        $('body').append(str);
+    }
+     
+    this.setUrl = function setUrl(url){
+        this.url = url;
+    };
+    
+    this.setCallback = function setCallback(callBack){
+        fv_ajaxCallback = callBack;
+    };
+ 
+    this.addParam = function addParam(key,value){
+        this.param = this.param + "&" + key + "=" + value;
+    };
+     
+    this.ajax = function ajax(){
+        if(this.formId != "commonForm"){
+            this.param += "&" + $("#" + this.formId).serialize();
+        }
+        $.ajax({
+            url : this.url,   
+            type : "POST",  
+            data : this.param,
+            async : false,
+            success : function(data, status) {
+                if(typeof(fv_ajaxCallback) == "function"){
+                    fv_ajaxCallback(data);
+                }
+                else {
+                    eval(fv_ajaxCallback + "(data);");
+                }
+            }
+        });
+    };
+}
+
+출처: http://addio3305.tistory.com/91?category=772645 [흔한 개발자의 개발 노트]
+  ```
+  
+  </details>
+  
+  
+  
+<details>
+<summary>호출하기</summary>
+
+```
+//위에서 만든 걸 이런식으로 불러와서 쓰면 된다
+
+function fn_selectBoardList(pageNo){
+            var comAjax = new ComAjax();
+            comAjax.setUrl("<c:url value='/sample/selectBoardList.do' />");
+            comAjax.setCallback("fn_selectBoardListCallback");
+            comAjax.addParam("PAGE_INDEX",pageNo);
+            comAjax.addParam("PAGE_ROW", 15);
+            comAjax.ajax();
+        }
+```
+  
+</details>
