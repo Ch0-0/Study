@@ -46,7 +46,9 @@ AJAX를 사용하려면 스크립팅 언어가 필요합니다. AJAX 호출이 �
 
 [출처: https://ko.strephonsays.com/ajax-and-vs-jquery-11297]
 
-
+  ```
+  test
+  ```
 
 ### Ajax 문법
 #### 1. 기본적인 문법
