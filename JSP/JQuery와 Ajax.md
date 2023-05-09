@@ -46,19 +46,104 @@ AJAX를 사용하려면 스크립팅 언어가 필요합니다. AJAX 호출이 �
 
 [출처: https://ko.strephonsays.com/ajax-and-vs-jquery-11297]
 
-  ```
-  test
-  ```
 
 ### Ajax 문법
 #### 1. 기본적인 문법
 <details>
   <summary>펼치기/접기</summary>
   ```
-  test
-  ```
-  test
-  ```
+//다른 파일을 현재 파일에 구동하는 방식 jQuery
+//여기선 dictionary를 구현 
+$(document).ready(function() {
+  $('#load').click(function() {
+    $('#dictionary').load("load.html");
+    return false;
+  });
+});
+//jQuery와 AJAX 사용 
+/*약식*/
+//get함수
+$.get ( URL , DATA , CALLBACK);
+//post함수
+$.post ( URL , DATA , CALLBACK);
+/*전체*/ 
+$(webDocument).ready(function(){
+    $('#데이터 요청한 선택자').Event(function(){
+        $.ajax({
+            url:'요청.URL',
+            type:'요청 Method',
+            dataType:'요청 dataType',
+            success: function(서버로 부터 응답 받은 data){ //콜백 함수
+                $('#데이터 넣을 선택자').empty(); //비워주기
+                $.each($(서버로 부터 응답 받은 data).find('entry'), function(){
+                var $entry=$(this);
+                var html ='<div class="entry">';
+                    html +='<h3 class="term">'+ $entry.attr('term'); +'</h3>';
+                    html +='<div class="part">'+ $entry.attr('part'); +'</div>';
+                    html +='<div class="definition">'+  $entry.text()+'</div>';
+                    html +='</div>';
+                    $('#데이터 넣을 선택자').append(html);
+                }); //end each
+            }//end
+        });//end ajax
+        return false;
+    });
+});
+//getJSON 구현
+//약식
+$.getJSON( URL , DATA , CALLBACK);
+/*
+
+*설명:*
+첫번째 매개 변수 URL로는 요청을 보낼 URL주소를 입력하게되며, 
+두번째 매개 변수 DATA로는 클라이언트의 요청을 통해 서버로 부터 받은 DATA를  
+세번째 매개변수로는 통신 성공시 구현하게될 콜백 함수를 정의해 주게 된다.
+
+콜백 함수란 그럼 무엇인가?
+-callback()는 클라이언트가 서버에 동작을 요청하고 클라이언트가 그 결과를 받을 때 호출되는 함수! 
+-즉 다시 말하자면 AJAX 요청이 완료된 후에 호출될 함수의 이름을 지정하는 것
+
+*/
+//dictionary.js 구현
+$(document).ready(function() {
+    $('#json').click(function() {
+        $.getJSON('json.json',function(data){ 
+            $('#dictionary').empty();
+            $.each(data,function(index,entry){
+                var html ='<div class="entry">';
+                html +='<h3 class="term">'+entry.term +'</h3>';
+                html +='<div class="part">'+entry.part +'</div>';
+                html +='<div class="definition">'+ entry.definition+'</div>';
+                html +='</div>';
+                $('#dictionary').append(html);
+            });// end each
+        });// end json
+        return false;
+    });// end click
+});
+//JAVASCRIPT 방식
+test.html
+<span id="selectorForOutput"></span></p>
+<input type="button"/>
+<script>
+document.querySelector('데이터 입력 선택자').addEventListener('event').function(event){
+    var xhr=new XMLHttpRequest();
+    xhr.open('방식(GET/POST)','요청 URL');
+    xhr.onreadystatechange=function(){
+    //통신 완료 && 통신 성공 
+        if(xhr.readyState===4 && xhr.status===200){
+            document.querySelector('데이터 출력 선택자').innerHTML=xhr.responseText;
+        }
+    }
+    xhr.send();
+});
+</script>
+//참고 http://www.nextree.co.kr/p11205/
+```
+  
+  
+  
+  
   </details>
 
   
