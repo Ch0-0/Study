@@ -1,0 +1,11 @@
+## md(markdown)파일 html이나 pdf로 변환하기
+
+필자의 경우 vscode(visualstudio)를 활용했다.
+Markdown PDF 을 다운받아준다.
+
+Crtl + Shift + P 를 입력하여 markdown이라고 검색하면 to html 혹은 to pdf 로 변환해서 저장할 수 있다.
+
+tasks.json으로 만들어 Crtl + Shift + B 로 해봤지만 계속 에러가 났다..
+하지만 이과정에서 얻은것도 있는데 Default 터미널을 변경하는 방법이다.
+
+Crtl + Shift + P 를 입력후 Terminal: Select Default Profile을 선택하여 바로 실행되는 터미널을 설정 할 수 있다.
