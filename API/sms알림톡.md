@@ -6,7 +6,7 @@
 - [API컨트롤러](#API-컨트롤러)
 
 ## API 컨트롤러
-
+```
 @Controller
 @CrossOrigin(origins = {"URL","URL"...}) //접근허용 URL
 @RequestMapping(value = "/tax/ai/")
@@ -45,3 +45,4 @@ public class SmsSendController {
 
 
 }
+```
