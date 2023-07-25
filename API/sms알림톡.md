@@ -40,6 +40,18 @@ public class SmsSendController {
     ModelAndView mv = new ModelAndView("jsonView");
     ResponseObj resobj = new ResponseOjb();
 
+    try {
+            LOG.info(">> uri {}, param {}", uri, commanMap.getMap());
+
+            String phoneNum  = StringUtil.nullToStr((String) commandmap.get("PHONE_NUM"), "");
+            String authNum   = StringUtil.nullToStr((String) commandmap.get("AUTH_NUM"), "");
+
+            if(!isValidCheckSmsAuthParam(phoneNum, authNum)) {
+              resobj.setErr(ExceptionMsg.ERR_AUTH_KEY);
+              mv.addObject("resobj", resobj.getResmap());
+            }
+
+    }
 
   }
 
