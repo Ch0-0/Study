@@ -7,6 +7,15 @@
 
 ## API 컨트롤러
 ```
+import com.study.common.vo.ExceptionMsg;
+import com.study.common.vo.CommandMap;
+import com.study.common.vo.ResponseObj;
+
+import com.study.smsAuth.service.SmsSendService;
+import com.study.common.link.service.linkService;
+
+
+
 @Controller
 @CrossOrigin(origins = {"URL","URL"...}) //접근허용 URL
 @RequestMapping(value = "/tax/ai/")
@@ -49,7 +58,10 @@ public class SmsSendController {
             if(!isValidCheckSmsAuthParam(phoneNum, authNum)) {
               resobj.setErr(ExceptionMsg.ERR_AUTH_KEY);
               mv.addObject("resobj", resobj.getResmap());
+              return mv;
             }
+
+            String token = linkService.getHeaderToken(request);
 
     }
 
