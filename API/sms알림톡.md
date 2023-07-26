@@ -63,9 +63,25 @@ public class SmsSendController {
 
             String token = linkService.getHeaderToken(request);
 
-    }
+            if (StringUtil.isEmpty(token) || !isValidToken(token, phoneNum)) {
+              resobj.setErr(ExceptionMsg.ERR_AUTH_KEY);
+              mv.addObject("resobj", resobj.getResmap());
+              return mv;
+            }
 
+            smsSendService.smsSendAuthNum(phoneNo, authNum);
+
+            resobj.setRslt(AppConstant.SUCC);
+
+    } catch (Exception e) {
+      LOG.errer("ERROR: " + e.getMessage(), e);
+      resobj.setErr(ExceptionMsg.ERR_SERVER_ERROR);
+    }
+    mv.addObject("resobj", resobj.getResmap());
+    return mv;
   }
+
+
 
 
 }
