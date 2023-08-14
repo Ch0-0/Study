@@ -27,3 +27,6 @@
   pom.xml 혹은 Maven -> Add Dependency 로 필요한 jar의 버전을 가져올 수 있다. <br>
 
   <b>결론: 프로젝트를 import 후에 Configure Build Path 에서 JRE System Library 를 수정해도 적용되지 않는다면, Maven Dependencies가 있는지 확인해보자. </b>
+
+ pom.xml 이 없는 프로젝트에서 gradle to maven 한다면 아래의 사이트를 참고해보자. <br>
+https://dev-comsj.tistory.com/entry/java-buildgradle-maven-pomxml-%EB%B3%80%ED%99%98
