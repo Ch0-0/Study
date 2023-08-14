@@ -22,7 +22,7 @@
   Project -> Clean 
   이 전체 과정을 반복해서 진행중이였는데 Build Path -> Configure Build Path... 에서 모이지 않던 Maven Dependencies 가 생성 <br>
 
-  * import 하지못했던 에러메시지들도 이제보니 Maven Dependencies에서 가져오는 것들이였다* 
+* import 하지못했던 에러메시지들도 이제보니 Maven Dependencies에서 가져오는 것들이였다
 
   pom.xml 혹은 Maven -> Add Dependency 로 필요한 jar의 버전을 가져올 수 있다. <br>
 
